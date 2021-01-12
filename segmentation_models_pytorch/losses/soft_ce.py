@@ -1,4 +1,5 @@
 from typing import Optional
+import re
 from torch import nn, Tensor
 import torch
 import torch.nn.functional as F
@@ -35,6 +36,15 @@ class SoftCrossEntropyLoss(nn.Module):
         self.ignore_index = ignore_index
         self.reduction = reduction
         self.dim = dim
+
+    @property
+    def __name__(self):
+        if self._name is None:
+            name = self.__class__.__name__
+            s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+            return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+        else:
+            return self._name
 
     def forward(self, y_pred: torch.Tensor, y_true: torch.Tensor) -> torch.Tensor:
         log_prob = F.log_softmax(y_pred, dim=self.dim)

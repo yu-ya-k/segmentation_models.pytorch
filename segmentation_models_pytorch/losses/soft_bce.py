@@ -3,11 +3,12 @@ from typing import Optional
 import torch
 import torch.nn.functional as F
 from torch import nn, Tensor
+from ..utils import base
 
 __all__ = ["SoftBCEWithLogitsLoss"]
 
 
-class SoftBCEWithLogitsLoss(nn.Module):
+class SoftBCEWithLogitsLoss(nn.Module, base.Loss):
 
     __constants__ = ["weight", "pos_weight", "reduction", "ignore_index", "smooth_factor"]
 
