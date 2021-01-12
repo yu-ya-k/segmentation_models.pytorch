@@ -3,11 +3,12 @@ from torch import nn, Tensor
 import torch
 import torch.nn.functional as F
 from ._functional import label_smoothed_nll_loss
+from ..utils import base
 
 __all__ = ["SoftCrossEntropyLoss"]
 
 
-class SoftCrossEntropyLoss(nn.Module):
+class SoftCrossEntropyLoss(nn.Module, base.Loss):
 
     __constants__ = ["reduction", "ignore_index", "smooth_factor"]
 
