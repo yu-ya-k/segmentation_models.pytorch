@@ -11,6 +11,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 from torch.nn.modules.loss import _Loss
 from .constants import BINARY_MODE, MULTICLASS_MODE, MULTILABEL_MODE
+from ..utils import base
 
 try:
     from itertools import ifilterfalse
@@ -186,7 +187,7 @@ def mean(values, ignore_nan=False, empty=0):
     return acc / n
 
 
-class LovaszLoss(_Loss):
+class LovaszLoss(_Loss, base.Loss):
     def __init__(
         self,
         mode: str,
